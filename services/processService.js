@@ -7,31 +7,25 @@ exports.createProcess = async (data) => {
   return response;
 };
 
-// services/processService.js
-
 exports.processDescription = async (description) => {
-  const newProcess = await Process.create({ description });
-  const aiResponse = await openaiService.getAIResponse(description);
-  const rawSteps = aiResponse.includes("\n\n")
-    ? aiResponse.split(/\n\n/)
-    : aiResponse.split(/\n/);
+  try {
+    const newProcess = await Process.create({ description });
 
-  const stepsArray = rawSteps
-    .map((step) => {
-      const [orderPart, rest] = step.split(". ");
-      const [title, stepDescription] = rest.split(": ");
-      return {
-        order: parseInt(orderPart, 10),
-        title: title.trim(),
-        description: stepDescription.trim(),
-        processId: newProcess.id,
-      };
-    })
-    .filter((step) => step != null);
+    const aiResponse = await openaiService.aiResponse(
+      description,
+      newProcess.id
+    );
+    const rawSteps = JSON.parse(aiResponse);
+    console.log(rawSteps);
+    const stepsArray = rawSteps.steps;
+    for (const stepData of stepsArray) {
+      console.log(stepData, "yolo");
+      await Step.create(stepData);
+    }
 
-  for (const stepData of stepsArray) {
-    await Step.create(stepData);
+    return rawSteps;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-
-  return { processId: newProcess.id, steps: stepsArray };
 };
