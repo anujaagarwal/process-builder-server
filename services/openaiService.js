@@ -1,8 +1,16 @@
 // services/openaiService.js
 const { OpenAI } = require("openai");
-require("dotenv").config();
+// require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
+const apiKey = process.env.OPENAI_API_KEY;
+
+if (!apiKey) {
+  throw new Error("Api key not found");
+}
+
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey,
 });
 
 exports.getAIResponse = async (description) => {
