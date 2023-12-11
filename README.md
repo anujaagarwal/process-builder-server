@@ -7,10 +7,11 @@
 - [Schema Design](#getting-started)
 - [Program Design](#design-decision)
 - [Folder Structure](#folder-structure)
-- [Technologies Used](#technologies)
-- [API Contract](#api-integration)
-- [Testing](#ui)
-- [Deployment](#Deployment)
+- [Technologies Used](#technologies-used)
+- [API Contract](#api-contract)
+- [Testing](#testing)
+- [Known Issues](#known-issues)
+- [Deployment](#deployment)
 
 Certainly! Here's a basic outline for a "Getting Started" documentation for the backend server.
 
@@ -405,6 +406,10 @@ Here is an high level definition of APIs I have used.
 ## Testing
 
 Start the node server and one by one use the above endpoints and the localhost url to test the apis in postman.
+
+## Known Issues
+
+- Now the openAI api is giving response slow, so have to optimise it.
 
 ## Deployment
 
