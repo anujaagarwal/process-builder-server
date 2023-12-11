@@ -19,7 +19,7 @@ exports.aiResponse = async function (description, processId) {
       {
         role: "system",
         content: `Hey ChatGPT, I am providing you with a description of a process. Based on this description, please generate a detailed step-by-step guide. It is crucial that the structure of your response remains consistent throughout and it should be in proper JSON. Each step should be clearly numbered and include a concise title followed by a brief explanation. The format should be as follows:
-        In the response please give two fields one is processId which is ${processId} and steps array which mandatorily include ${processId} in each step please give accurate this format json under steps - {
+        In the response please give two fields one is processId which is ${processId} and steps array which you have to strictly include ${processId} in each step please give accurate this format json under steps - {
         {  "order": 1,
           "title": "Warm Up Exercises",
           "description": "To begin, engage in vocal warm-up exercises to prepare your voice for singing",
